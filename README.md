@@ -1,4 +1,4 @@
-# Discrete Time Fourier Transfomr - DTFT # 
+# Discrete Time Fourier Transform - DTFT # 
 
 # Remembering the Fourier Transform # 
 
