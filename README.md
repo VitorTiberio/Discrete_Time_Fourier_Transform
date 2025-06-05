@@ -10,7 +10,7 @@ $$
 
 ## Defining an auxiliary function $g_d(t)$ that comes very close to g[n] ##
 
-To initialize our analysis, we need to define a intermediary function, to help us to get the DTFT. 
+To initialize our analysis, we need to define an intermediary function, to help us to get the DTFT. 
 
 When we are talking about g[n], the value in intervals of n is equal to zero, while the value in n is different zero. 
 
