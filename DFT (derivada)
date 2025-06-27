@@ -1,0 +1,66 @@
+clear all;
+close all;
+
+N = 2^10;   %número de pontos 
+
+n = [-N/2:1:N/2-1];     % vetor n (período central)
+
+ti = -300;  % definição da janela temporal
+tf = -ti; 
+
+Ts = (tf - ti)/N;   % período de amostragem
+fs = 1/ Ts;         % frequência de amostragem
+
+t = n*Ts;   % vetor tempo 
+
+k = n;      % vetor k (igual a n, mas usado para a frequencia)
+
+v = k./N;  % vetor v
+
+f = v*fs;  % vetor f
+
+A = 5;      % discretização da função gaussiana
+
+sigma = 10; 
+
+g_t = A*sigma*exp(-(t./sigma).^2); 
+
+
+% calculo da derivada 
+
+X_DFT = fftshift(fft(fftshift(g_t)));   % DFT de g(t)
+
+X_FT = X_DFT*Ts;    % TF de g(t)
+
+H = 1i*2*pi*f;  % resposta na frequencia da derivada 
+
+Y_FT = H.*X_FT;      % TF da saída (Y(f))
+
+Y_DFT = Y_FT/Ts;   % DFT de Y(f)
+
+y_ifft = fftshift(ifft(fftshift(Y_DFT)));   % DFT inversa da saída 
+
+
+% plot da gaussiana (g(t))
+figure(1)
+plot(n,g_t)
+xlabel('n')
+ylabel('g(t)')
+
+% plot da derivada 
+figure(2)
+plot(t,y_ifft)
+xlabel('time')
+ylabel('y(t)=dx/dt')
+
+% plot de TF de g(t)
+figure(3)
+plot(f,abs(X_FT))
+xlabel('f')
+ylabel('TF de g(t)')
+
+% plot da TF de y(t) = dx/dt 
+figure (4)
+plot(f,abs(Y_FT))
+xlabel('f')
+ylabel('TF de y(t)')
